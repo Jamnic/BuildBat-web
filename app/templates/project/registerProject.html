@@ -1,0 +1,54 @@
+<div class="col-lg-12 well">
+    <div class="row">
+        <div class="col-lg-6">
+            <h4>Register new project</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"><span class="pull-right">Project name</span></div>
+        <div class="col-lg-4"><input type="text" ng-model="newProjectName"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2"><span class="pull-right">Project directory</span></div>
+        <div class="col-lg-4"><input type="text" ng-model="newProjectDirectory"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2"><span class="pull-right">Maven config</span></div>
+        <div class="col-lg-4"><select
+                style="border: 1px solid #ccc;
+                box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+                color: rgba(0,0,0,0.75);
+                display: block;
+                font-size: 0.875em;
+                margin: 0 0 1em 0;
+                padding: 0.5em;
+                height: 2.3125em;
+                width: 100%;"
+                ng-options="configuration.name for configuration in mavenConfigurations"
+                ng-model="mavenOption"></select></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2"><span class="pull-right">Tomcat config</span></span></div>
+        <div class="col-lg-4"><select
+                style="border: 1px solid #ccc;
+                box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+                color: rgba(0,0,0,0.75);
+                display: block;
+                font-size: 0.875em;
+                margin: 0 0 1em 0;
+                padding: 0.5em;
+                height: 2.3125em;
+                width: 100%;"
+                ng-options="configuration.name for configuration in tomcatConfigurations"
+                ng-model="tomcatOption"></select></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-lg-offset-4">
+            <button class="col-lg-12" ng-click="registerNewProject()">Register</button>
+        </div>
+    </div>
+</div>

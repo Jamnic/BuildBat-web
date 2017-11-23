@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="col-lg-3">
+
+        <div class="row">
+            <ul class="list-group">
+                <li class="list-group-item"
+                    ng-class="{'active': log === logModel.pickedLog}"
+                    ng-repeat="log in logModel.logs | orderBy: '-name'">
+                    <a href="#" ng-click="viewLog(log)">{{log.name}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <project-console-log-viewer log-model="logModel"></project-console-log-viewer>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div>
+    <project-nav-bar project="project"
+                     log-model="logModel"
+                     tabs-model="tabsModel"></project-nav-bar>
+
+    <div class="col-lg-12 well">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="tab-content">
+                    <div role="tabpanel"
+                         class="tab-pane"
+                         ng-class="{'active': tabsModel.selectedTab === 'projectInfo'}" id="projectInfo">
+                        <div class="col-lg-6">
+                            <project-info project="project"></project-info>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel"
+                         class="tab-pane"
+                         ng-class="{'active': tabsModel.selectedTab === 'projectConsole'}" id="profile">
+                        <project-console project="project"
+                                         log-model="logModel"></project-console>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,60 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">BuildBat</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active" ng-click="goToPath('/home')"><a href="#">Home</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Projects
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li ng-click="goToPath('/registerProject')">
+                        <a href="#">Register project</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li ng-repeat="project in projects"
+                        ng-click="goToPath('/project/' + project.name)">
+                        <a href="#">
+                            <img src="img/maven.png" ng-show="project.params.maven" style="width: 15px;"/>
+                            <img src="img/tomcat.png" ng-show="project.params.tomcat" style="width: 15px;"/>
+                            {{project.name}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Maven
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li ng-click="goToPath('/registerMavenConfiguration')">
+                        <a href="#">Register configuration</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li ng-repeat="configuration in mavenConfigurations"
+                        ng-click="goToPath('/maven/' + configuration.name)">
+                        <a href="#">{{configuration.name}} <span ng-hide="configuration.homeExists" class="glyphicon glyphicon-alert"/></a>
+                        </span>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tomcat
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li ng-click="goToPath('/registerTomcatConfiguration')">
+                        <a href="#">Register configuration</a>
+                    </li>
+                    <li ng-click="goToPath('/registerTomcatContainer')">
+                        <a href="#">Register container</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li ng-repeat="configuration in tomcatConfigurations"
+                        ng-click="goToPath('/tomcat/' + configuration.name)">
+                        <a href="#">{{configuration.name}} <span ng-hide="configuration.container.containerExists" class="glyphicon glyphicon-alert"/></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,25 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">{{project.name}}</a>
+        </div>
+        <ul class="nav navbar-nav ">
+            <li ng-click="tabsModel.selectedTab = 'projectInfo'"><a href="#">Project info</a></li>
+            <li ng-click="tabsModel.selectedTab = 'projectConsole'"><a href="#">Console</a></li>
+            <li class="dropdown navbar-right">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Run configurations
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="configuration in project.runConfigurations"
+                        ng-click="runConfiguration(configuration)">
+                        <a href="#">
+                            <img src="img/maven.png" ng-show="configuration.json.executor === 'maven'" style="width: 15px;"/>
+                            <img src="img/tomcat.png" ng-show="configuration.json.executor === 'tomcat'" style="width: 15px;"/>
+                            {{configuration.name}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
