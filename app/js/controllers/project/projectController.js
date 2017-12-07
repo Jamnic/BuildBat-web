@@ -22,6 +22,7 @@ angular
                 json: {
                     command: "package",
                     projectName: project.name,
+                    submoduleName: "web",
                     executor: "maven"
                 }
             });
