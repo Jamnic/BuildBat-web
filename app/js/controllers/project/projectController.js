@@ -1,15 +1,15 @@
 angular
     .module("app")
-    .controller('ProjectController', function ($scope, $location, project) {
+    .controller('ProjectController', function ($scope, $location, project, ProjectLogsResource) {
         $scope.project = project;
-        $scope.logModel = {logs: project.logs, pickedLog: undefined};
+        $scope.logModel = {logs: project.logs, pickedLog: undefined, reload: reload};
         $scope.logsCollapsed = false;
         $scope.project.runConfigurations = [];
         $scope.tabsModel = {selectedTab: "projectInfo"};
 
         if (project.params.maven) {
             $scope.project.runConfigurations.push({
-                name: "Maven build",
+                name: "Build",
                 json: {
                     command: "-U clean install",
                     projectName: project.name,
@@ -18,9 +18,18 @@ angular
             });
 
             $scope.project.runConfigurations.push({
-                name: "Maven war package",
+                name: "War package",
                 json: {
-                    command: "-U clean install war:war",
+                    command: "package",
+                    projectName: project.name,
+                    executor: "maven"
+                }
+            });
+
+            $scope.project.runConfigurations.push({
+                name: "Test",
+                json: {
+                    command: "test -T4 -DspringProfileName=test",
                     projectName: project.name,
                     executor: "maven"
                 }
@@ -29,16 +38,16 @@ angular
 
         if (project.params.tomcat) {
             $scope.project.runConfigurations.push({
-                name: "Tomcat deploy",
+                name: "Deploy",
                 json: {
-                    command: 'cmd.exe /c copy "{warFile}" "{home}webapps\\{pathName}.war"',
+                    command: 'cmd.exe /c copy "[web {warFile}]" "{home}\\webapps\\{pathName}.war"',
                     projectName: project.name,
                     executor: "tomcat",
                     tomcatConfiguration: project.params.tomcat
                 }
             });
             $scope.project.runConfigurations.push({
-                name: "Tomcat run",
+                name: "Run",
                 json: {
                     command: 'cmd.exe /c catalina.bat run -config "{serverXml}"',
                     projectName: project.name,
@@ -47,4 +56,18 @@ angular
                 }
             });
         }
+
+        function reload() {
+            ProjectLogsResource
+                .get({projectName: $scope.project.name})
+                .$promise
+                .then(function (success) {
+                    $scope.logModel.logs = success.logs;
+                    $scope.logModel.pickedLog = success.logs[success.logs.length - 1]
+                }, function (error) {
+                    console.log(error);
+                })
+        }
     });
+
+

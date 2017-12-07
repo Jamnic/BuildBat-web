@@ -14,9 +14,9 @@ angular
 
                 function runConfiguration(configuration) {
                     $http.post("http://localhost:10000/" + configuration.json.executor, configuration.json)
-                        .then(function (success) {
-                            $scope.logModel.logs.push(success.data);
-                            $scope.logModel.pickedLog = success.data;
+                        .then(function () {
+                            $scope.logModel.reload();
+                            $scope.tabsModel.selectedTab = 'projectConsole';
                         }, function (error) {
                             console.log(error);
                         })

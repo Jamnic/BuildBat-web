@@ -46,7 +46,7 @@ angular
                     var img = document.createElement('div');
 
                     socket.onopen = function open() {
-                        socket.send($scope.logModel.pickedLog.logFile)
+                        socket.send($scope.logModel.pickedLog.logFile);
 
                         var log = document.getElementById("log");
                         img.innerHTML = "<img src='img/loading.gif' width='20' height='20'>";
